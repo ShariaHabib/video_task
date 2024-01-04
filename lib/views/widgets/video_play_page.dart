@@ -44,11 +44,17 @@ class _VideoPlayState extends State<VideoPlay> {
     super.dispose();
   }
 
+  void thumbLine() {
+    setState(() {
+      isThumbnailVisible = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        if (isThumbnailVisible)
+        if (!videoPlayerController.value.isInitialized)
           Column(
             children: [
               // SizedBox(height: 40),
@@ -61,7 +67,7 @@ class _VideoPlayState extends State<VideoPlay> {
               ),
             ],
           ),
-        if (videoPlayerController.value.isInitialized && !isThumbnailVisible)
+        if (videoPlayerController.value.isInitialized)
           Column(
             children: [
               AspectRatio(
@@ -70,27 +76,20 @@ class _VideoPlayState extends State<VideoPlay> {
               ),
             ],
           ),
-        if (isThumbnailVisible)
-          Column(
-            crossAxisAlignment: ,
-            children: [
-              Center(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.play_circle_fill,
-                    size: 50.0,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isThumbnailVisible = false;
-                      chewieController.play();
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
+        // if (isThumbnailVisible)
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.play_circle_fill,
+        //       size: 50.0,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () {
+        //       setState(() {
+        //         isThumbnailVisible = false;
+        //         chewieController.play();
+        //       });
+        //     },
+        //   ),
         Positioned(
             top: 35,
             child: IconButton(
