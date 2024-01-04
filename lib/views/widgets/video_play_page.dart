@@ -46,60 +46,60 @@ class _VideoPlayState extends State<VideoPlay> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Stack(
-        children: [
-          if (isThumbnailVisible)
-            Column(
-              children: [
-                SizedBox(height: 40),
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Image.network(
-                    widget.thumbnail,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
+    return Stack(
+      children: [
+        if (isThumbnailVisible)
+          Column(
+            children: [
+              // SizedBox(height: 40),
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Image.network(
+                  widget.thumbnail,
+                  fit: BoxFit.contain,
                 ),
-              ],
-            ),
-          if (videoPlayerController.value.isInitialized && !isThumbnailVisible)
-            Column(
-              children: [
-                AspectRatio(
-                  aspectRatio: videoPlayerController.value.aspectRatio,
-                  child: Chewie(controller: chewieController),
-                ),
-              ],
-            ),
-          if (isThumbnailVisible)
-            Center(
-              child: IconButton(
-                icon: Icon(
-                  Icons.play_circle_fill,
-                  size: 50.0,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  setState(() {
-                    isThumbnailVisible = false;
-                    chewieController.play();
-                  });
-                },
               ),
-            ),
-          Positioned(
-              top: 35,
-              child: IconButton(
+            ],
+          ),
+        if (videoPlayerController.value.isInitialized && !isThumbnailVisible)
+          Column(
+            children: [
+              AspectRatio(
+                aspectRatio: videoPlayerController.value.aspectRatio,
+                child: Chewie(controller: chewieController),
+              ),
+            ],
+          ),
+        if (isThumbnailVisible)
+          Column(
+            crossAxisAlignment: ,
+            children: [
+              Center(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.play_circle_fill,
+                    size: 50.0,
+                    color: Colors.white,
+                  ),
                   onPressed: () {
-                    print("PRESSED");
-                    Navigator.of(context).pop();
+                    setState(() {
+                      isThumbnailVisible = false;
+                      chewieController.play();
+                    });
                   },
-                  icon: const Icon(Icons.arrow_back)))
-        ],
-      ),
+                ),
+              ),
+            ],
+          ),
+        Positioned(
+            top: 35,
+            child: IconButton(
+                onPressed: () {
+                  print("PRESSED");
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.arrow_back)))
+      ],
     );
   }
 }

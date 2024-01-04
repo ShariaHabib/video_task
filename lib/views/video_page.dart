@@ -25,7 +25,6 @@ class _VideoDetailsState extends State<VideoDetails> {
               videoLink: widget.video.manifest ?? "",
               thumbnail: widget.video.thumbnail ?? ""),
           Expanded(
-            flex: 2,
             child: Column(
               children: [
                 Expanded(
