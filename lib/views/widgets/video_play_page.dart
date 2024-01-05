@@ -56,14 +56,28 @@ class _VideoPlayState extends State<VideoPlay> {
       children: [
         if (!videoPlayerController.value.isInitialized)
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // SizedBox(height: 40),
-              AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Image.network(
-                  widget.thumbnail,
-                  fit: BoxFit.contain,
-                ),
+              Stack(
+                children: [
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.network(
+                      widget.thumbnail,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                          backgroundColor: Colors.amber),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
